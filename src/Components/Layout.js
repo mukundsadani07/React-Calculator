@@ -8,24 +8,30 @@ const Layout = () => {
   const displayHandler = (event) => {
     setResult(result.concat(event.target.value));
   };
+
   const clearHandler = () => {
     setResult("");
   };
+
   const backSpaceHandler = () => {
     setResult(result.slice(0, -1));
   };
+  
   const evaluteHandler = () => {
     try {
       setResult(eval(result).toString());
     } catch (err) {
       setResult("error");
     }
+    if (result.length > 16) {
+      setResult("Out of bounds");
+    }
   };
 
   return (
     <div>
       {/* <div className="screen">{result}</div> */}
-      <Screen result={result}/>
+      <Screen result={result} />
       <div className="main">
         <div className="subButton">
           <button onClick={clearHandler} className="AC" id="clear">
